@@ -3,11 +3,31 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
+server.listen(80);
+
+// Connect to DB
+mongoose.connect('mongodb://localhost:27017/final-projectr', { useNewUrlParser: true });
+
+// Check db connection
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.on('open', () => {
+  console.log('Connected to the goose!');
+})
+
+// Setup Socket.io
+io.on('connection', (socket) => {
+  console.log('User connected');
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
