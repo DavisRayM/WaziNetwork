@@ -6,12 +6,7 @@ const passport = require('passport');
 
 /* GET /auth index */
 router.get('/', (req, res, next) => {
-  res.send('respond with auth index');
-});
-
-/* GET /auth/register */
-router.get('/register', (req, res, next) => {
-  res.send('respond with register page');
+  res.render('auth/index', { title: 'Freelance Network - Auth'});
 });
 
 /* POST /auth/register */
@@ -26,11 +21,6 @@ router.post('/register', (req, res, next) => {
     console.log('User registered');
     res.redirect('/');
   });
-});
-
-/* GET /auth/login */
-router.get('/login', (req, res, next) => {
-  res.send('respond with login page');
 });
 
 /* POST /auth/login */

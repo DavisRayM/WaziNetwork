@@ -13,6 +13,7 @@ const usersRouter = require('./routes/users');
 
 const User = require('./models/user');
 
+const engine = require('ejs-mate');
 const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
@@ -20,6 +21,7 @@ const io = require('socket.io')(server);
 server.listen(80);
 
 // view engine setup
+app.engine('ejs', engine);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
