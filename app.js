@@ -6,7 +6,6 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
-const LocalStrategy = require('passport-local').Strategy;
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -46,7 +45,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Configure passport-local
-passport.use(new LocalStrategy(User.authenticate()));
+passport.use(User.createStrategy());
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -67,6 +66,16 @@ db.on('open', () => {
 // Setup Socket.io
 io.on('connection', (socket) => {
   console.log('User connected');
+});
+
+// set local variables middleware
+app.use(function (req, res, next) {
+  // set error message
+  res.locals.error = req.session.error || ' ';
+  delete req.session.error;
+
+  res.locals.currentUser = req.user;
+  next();
 });
 
 app.use('/', indexRouter);

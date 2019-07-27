@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:400,400i,700,700i&display=swap');
+
+body {
+    height: 100vh;
+    background: url('/images/alex-dukhanov-1l2ZSKCMDio-unsplash.jpg') no-repeat fixed center;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+.info-container {
+    font-size: 20px;
+}
+
+.carousel-indicators>li {
+    height: 9px;
+    width: 9px;
+    border-radius: 50%;
+}
+
+.action-link {
+    border-bottom: 1px solid #C5C6C7;
+    color: #C5C6C7;
+    padding: 0 20px;
+    width: 25%;
+    text-align: center;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.35s ease-in, border-bottom 0.35s ease-in;
+}
+
+.action-link:hover {
+    color: #66FCF1;
+    border-bottom: 1px solid #66FCF1;
+}
+
+.action-link.active {
+    color: #45A29E;
+    border-bottom: 1px solid #45A29E;
+}
+
+.form-text {
+    color: #66FCF1;
+}
+
+.form-input {
+    border-color: #45A29E;
+    color: #45A29E;
+}
+
+.form-input:focus {
+    border-color: #66FCF1;
+    box-shadow: 0 0 5px #66FCF1;
+    color: #45A29E;
+}
+
+.form-button {
+    background-color: #ffffff;
+    border-color: #C5C6C7;
+    color: #45A29E;
+    font-weight: bold;
+    letter-spacing: 3px;
+    width: 45%;
+}
+
+.form-button:hover {
+    background-color: #45A29E;
+    border-color: #45A29E;
+    color: #ffffff;
+}
+
+.form-error {
+    color: red;
+    font-size: 12px;
+}
+
+#auth-container {
+    height: 75%;
+    width: 65%;
+    background-color: #1F2833;
+    color: #C5C6C7;
+    border-radius: 10px;
+    padding: 0;
+    overflow: hidden;
+}
+
+#form-container {
+    color: #C5C6C7;
+}
+
+#info-display {
+    background-color: #0B0C10;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+#login-form {
+    position: relative;
+    top: 10%;
+    padding: 30px;
+}
+
+/* Utility classes */
+.max-height {
+    height: 100%;
+}
+
+.max-width {
+    width: 100%;
+}
