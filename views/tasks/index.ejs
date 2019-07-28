@@ -1,0 +1,15 @@
+<% layout('layouts/boilerplate') -%>
+<h1>Tasks Index!</h1>
+
+<% include ../partials/paginate-task %>
+
+<% tasks.docs.forEach(function(task) {%>
+    <div>
+        <h2><%= task.title %></h2>
+        <p>Price Range: <%= task.price_range %></p>
+        <p><%= task.description %></p>
+        <div><a href="/tasks/<%= task.id%>">View More</a></div>
+    </div>
+<% }); %>
+
+<% include ../partials/paginate-task %>

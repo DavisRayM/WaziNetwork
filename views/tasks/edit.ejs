@@ -1,0 +1,23 @@
+<% layout('layouts/boilerplate') -%>
+<h1>Edit Task!</h1>
+
+<form action="/tasks/<%= task.id %>?_method=PUT" method="POST" id="taskEditForm" enctype="multipart/form-data">
+    <input type="text" name="task[title]" placeholder="Title" value="<%= task.title %>">
+    <br>
+    <input type="text" name="task[price_range]" placeholder="Price Range" value="<%= task.price_range %>">
+    <br>
+    <textarea name="task[description]" placeholder="Description"><%= task.description %></textarea>
+    <br>
+    <div>
+        <input type="file" accept="image/*, .pdf" name="additional_content" id="contentUpload">
+        <% if (task.additional_content.secure_url != null) { %>
+        </br>
+        <a href="<%= task.additional_content.secure_url %>">Existing Content</a>
+        <label for="contentDelete">Delete existing additional content?</label>
+        <input name="deletedContent" type="checkbox" id="contentDelete" value="<%= task.additional_content.public_id %>">
+        <% } %>
+    </div>
+
+    <input type="submit">
+</form>
+<script src="/javascripts/task-edit.js"></script>

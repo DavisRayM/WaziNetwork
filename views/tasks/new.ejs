@@ -1,0 +1,16 @@
+<% layout('layouts/boilerplate') -%>
+<h1>New Task!</h1>
+
+<form action="/tasks" method="POST" enctype="multipart/form-data">
+    <input type="text" name="task[title]" placeholder="Title">
+    <br>
+    <input type="text"name="task[price_range]" placeholder="Price Range">
+    <br>
+    <textarea name="task[description]" placeholder="Description"></textarea>
+    <br>
+    <div>
+        <input type="file" accept="image/*, .pdf" name="additional_content">
+    </div>
+
+    <input type="submit">
+</form>

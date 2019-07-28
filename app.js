@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -7,8 +9,16 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
 
+// Development Code: auto-generate data
+// Uncomment to generate 80 tasks by default
+// Check ./seeds.js to modify
+// const seedPost = require('./seeds');
+// seedPost();
+
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const tasksRouter = require('./routes/tasks');
+const bidsRouter = require('./routes/bids');
 
 const User = require('./models/user');
 
@@ -80,6 +90,8 @@ app.use(function (req, res, next) {
 
 app.use('/', indexRouter);
 app.use('/auth', usersRouter);
+app.use('/tasks', tasksRouter);
+app.use('/tasks/:id/bids', bidsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -1,0 +1,51 @@
+<% layout('layouts/task-show') -%>
+<h1><%= task.title %></h1>
+<p><%= task.price_range %></p>
+<p><%= task.description %></p>
+
+<div>
+    <p>
+        <%= task.additional_content.secure_url %>
+    </p>
+</div>
+
+<div><a href="/tasks/<%= task.id%>/edit"><button>Edit Task</button></a></div>
+<div>
+    <form action="/tasks/<%= task.id%>?_method=DELETE" method="POST">
+        <input type="submit" value="Delete">
+    </form>
+</div>
+
+<h2>Make Bid</h2>
+<form action="/tasks/<%= task.id%>/bids" method="POST">
+    <textarea name="bid[description]" required minlength="5" placeholder="Description"></textarea>
+    <input type="number" name="bid[bid]" required placeholder="Bid amount">
+
+    <input type="submit">
+</form>
+
+<h3>Bids</h3>
+<!-- Display Bids - For Author Only -->
+<% bids.forEach(function(bid){%>
+Author: <%= bid.author.username %>
+Bid: <%= bid.bid %>
+</br>
+<% if(bid.author.equals(currentUser._id)) {%>
+<%= bid.description %>
+<div>
+    <button class="toggle-edit-form">Edit</button>
+
+    <form action="/tasks/<%= task.id%>/bids/<%= bid.id %>?_method=PUT" method="POST" class="edit-bid-form">
+        <textarea name="bid[description]" required minlength="5"
+            placeholder="Description"><%= bid.description %></textarea>
+        <input type="number" name="bid[bid]" required placeholder="Bid amount" value="<%= bid.bid %>">
+        <input type="submit" value="Update">
+    </form>
+
+    <form action="/tasks/<%= task.id%>/bids/<%= bid.id %>?_method=DELETE" method="POST">
+        <input type="submit" value="Delete">
+    </form>
+</div>
+<%}%>
+    <hr>
+<%})%>

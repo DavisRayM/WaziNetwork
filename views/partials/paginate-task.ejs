@@ -1,0 +1,15 @@
+<div style="margin: 20px 0;">
+    <% if(tasks.page - 1) {%>
+        <a href="/tasks?page=<%= tasks.page - 1 %>">Prev</a>
+    <% } %>
+
+    <% for(let i = 1; i <= tasks.pages; i++) {%>
+        <a href="/tasks?page=<%= i %>"
+            <%= i === tasks.page ? 'style=color:black;' : '' %>
+            ><%= i %></a>
+    <% } %>
+
+    <% if((tasks.page + 1) <= tasks.pages) {%>
+        <a href="/tasks?page=<%= tasks.page + 1 %>">Next</a>
+    <% } %>
+</div>

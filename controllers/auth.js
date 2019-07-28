@@ -43,7 +43,9 @@ module.exports = {
                 if (err) {
                     return next(err);
                 }
-                return res.redirect(`/auth/profile/${user.username}`);
+                const redirectUrl = req.session.redirectTo || `/auth/profile/${user.username}`;
+                delete req.session.redirectTo;
+                return res.redirect(redirectUrl);
             });
         })(req, res, next);
     },
