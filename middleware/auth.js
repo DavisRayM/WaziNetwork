@@ -1,3 +1,6 @@
+const Task = require('../models/task');
+const Bid = require('../models/bid');
+
 module.exports = {
     isLoggedIn: (req, res, next) => {
         if (req.isAuthenticated()) return next();

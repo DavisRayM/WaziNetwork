@@ -61,6 +61,7 @@ module.exports = {
     },
     // GET /tasks/:id/edit
     async taskEdit(req, res, next) {
+        const { task } = res.locals;
         res.render('tasks/edit', {
             title: `${appName} - Edit ${task.title}`
         });

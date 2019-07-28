@@ -18,8 +18,8 @@
 
 <h2>Make Bid</h2>
 <form action="/tasks/<%= task.id%>/bids" method="POST">
-    <textarea name="bid[description]" required minlength="5" placeholder="Description"></textarea>
-    <input type="number" name="bid[bid]" required placeholder="Bid amount">
+    <textarea name="description" required minlength="5" placeholder="Description"></textarea>
+    <input type="number" name="bid" required placeholder="Bid amount">
 
     <input type="submit">
 </form>
@@ -36,9 +36,9 @@ Bid: <%= bid.bid %>
     <button class="toggle-edit-form">Edit</button>
 
     <form action="/tasks/<%= task.id%>/bids/<%= bid.id %>?_method=PUT" method="POST" class="edit-bid-form">
-        <textarea name="bid[description]" required minlength="5"
+        <textarea name="description" required minlength="5"
             placeholder="Description"><%= bid.description %></textarea>
-        <input type="number" name="bid[bid]" required placeholder="Bid amount" value="<%= bid.bid %>">
+        <input type="number" name="bid" required placeholder="Bid amount" value="<%= bid.bid %>">
         <input type="submit" value="Update">
     </form>
 

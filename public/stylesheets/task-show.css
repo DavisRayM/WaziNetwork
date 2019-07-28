@@ -1,0 +1,5 @@
+@import url('/stylesheets/task-show.css');
+
+.edit-bid-form {
+    display: none;
+}

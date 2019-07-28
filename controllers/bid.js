@@ -15,7 +15,7 @@ module.exports = {
             req.session.error = 'Can create a new bid! One already exists!';
         } else {
             // create bid from form data
-            let bid = await Bid.create(req.body.bid);
+            let bid = await Bid.create(req.body);
             // link to task
             bid.task = task.id;
             // link to author
@@ -31,7 +31,7 @@ module.exports = {
     // PUT /task/:task_id/bid/:bid_id
     async bidUpdate(req, res, next) {
         // update bid object in db
-        await Bid.findByIdAndUpdate(req.params.bid_id, req.body.bid);
+        await Bid.findByIdAndUpdate(req.params.bid_id, req.body);
         // set success flash message
         req.session.success = 'Review updated!';
         // redirect back to task show page

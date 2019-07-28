@@ -8,6 +8,7 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
+const methodOverride = require('method-override');
 
 // Development Code: auto-generate data
 // Uncomment to generate 80 tasks by default
@@ -41,6 +42,9 @@ app.use(express.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'));
+
+// Configure sessions
 app.use(session({
   secret: 'wild goose chase aslkadksjdoa',
   resave: false,
@@ -80,6 +84,9 @@ io.on('connection', (socket) => {
 
 // set local variables middleware
 app.use(function (req, res, next) {
+  // set default title variable
+  res.locals.title = 'Freelance Network';
+
   // set error message
   res.locals.error = req.session.error || ' ';
   delete req.session.error;
