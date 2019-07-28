@@ -17,7 +17,10 @@ const UserSchema = new Schema({
         required: true
     },
     profile_picture: {
-        secure_url: String,
+        secure_url: {
+            type: String,
+            default: '/images/no-profile-picture.jpg'
+        },
         public_id: String
     },
     portfolio: {
@@ -30,8 +33,14 @@ const UserSchema = new Schema({
         default: false
     },
     meta: {
-        completed_tasks: Number,
-        failed_tasks: Number,
+        completed_tasks: {
+            type: Number,
+            default: 0
+        },
+        failed_tasks: {
+            type: Number,
+            default: 0
+        },
     }
 });
 

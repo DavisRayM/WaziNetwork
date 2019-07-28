@@ -1,1 +1,12 @@
+html, body {
+    height: 100vh;
+}
 
+/* Utility classes */
+.max-height {
+    height: 100%;
+}
+
+.max-width {
+    width: 100%;
+}

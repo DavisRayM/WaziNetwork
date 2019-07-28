@@ -1,0 +1,22 @@
+<% layout('layouts/theme-boilerplate') %>
+
+<div class="row">
+    <div class="profile-header text-center" style="background-color: #1F2833;">
+        <div class="container">
+            <div class="container-inner">
+                <img class="rounded-circle media-object" src="<%= user.profile_picture.secure_url %>">
+                <h3 class="profile-header-user"><%= user.fname %> <%= user.lname %></h3>
+                <p class="profile-header-bio">4.5 Stars</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row text-center m-3" style="height: 80%;">
+    <div class="col-sm-8 m-3 card">
+        <h1>User Comments</h1>
+    </div>
+    <div class="col-sm-3 card max-width m-3">
+        <h1>User Details</h1>
+    </div>
+</div>

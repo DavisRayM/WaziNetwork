@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Dynamic Title for Web page -->
+    <title><%= title %></title>
+
+    <!-- Theme CSS -->
+    <link href="/dist/toolkit.min.css" rel="stylesheet">
+    <!-- Inhouse Stylesheet -->
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+    <!-- Font awesome -->
+    <script src="https://kit.fontawesome.com/4a6ba1a766.js"></script>
+    <!-- Setup Socket.io -->
+    <script src="http://localhost:80/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io.connect('http://localhost:80');
+    </script>
+</head>
+
+<body>
+    <%- body -%>
+
+   <!-- Include jQuery (required) and the JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/dist/toolkit.min.js"></script>
+</body>
+
+</html>
