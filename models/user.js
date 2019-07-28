@@ -25,7 +25,10 @@ const UserSchema = new Schema({
         public_id: String
     },
     contact_number: Number,
-    is_superuser: Boolean,
+    is_superuser: {
+        type: Boolean,
+        default: false
+    },
     meta: {
         completed_tasks: Number,
         failed_tasks: Number,
