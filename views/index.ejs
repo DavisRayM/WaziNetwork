@@ -1,4 +1,44 @@
 <% layout('layouts/boilerplate') %>
 
-<h1><%= title %></h1>
-<p>Welcome to <%= title %></p>
+<section id="landingHeaderSection" class="container-fluid d-flex justify-content-start align-items-center">
+    <div class="container col-lg-8 mx-0 align-items-center em-text-light">
+        <h1 class="mt-5">
+            Home of the Remote Rockstar Workers!
+        </h1>
+        <p class="mt-1">We Provide Access to the best freelancers, giving you access to the best remote workforce
+            the internet has to offer.</p>
+        <a href="/tasks/new" class="btn btn-warning mr-1 my-2 my-lg-0">Start Posting Tasks</a>
+        <a href="/tasks" class="btn btn-outline-warning mr-1 my-2 my-lg-0">Start Completing Tasks</a>
+    </div>
+</section>
+
+<section id="landingContentSection" class="container justify-content-start align-items-center">
+    <div class="container border rounded my-5 mx-auto col-8 py-3 px-5 content justify-content-start align-items-start">
+        <h2 class="section-heading">How it works</h2>
+        <p>It all begins with a simple post of a task. Tasks are always free to post and allow freelancers to bid
+            on your task, quoting the prices and time required to complete the task.</p>
+        <p class="lead">After acquiring bids it's now up to the poster to select their preferred bidder and release
+            the bid amount to be held in escrow. After that the bidder and task poster can chat in real-time and
+            get started on seeing their project completed</p>
+        <p>On Completion of Project, the poster then marks the task as completed and the payment is released to the
+            bidder.</p>
+
+        <h2 class="section-heading">What do we have to offer ?</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione molestias adipisci pariatur nulla
+            asperiores expedita voluptate rerum exercitationem, quo, in harum placeat beatae obcaecati? Beatae
+            commodi similique corrupti assumenda expedita.</p>
+        <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. In, at ducimus suscipit voluptas
+            totam eos facilis dolorum exercitationem quam animi.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione molestias adipisci pariatur nulla
+            asperiores expedita voluptate rerum exercitationem, quo, in harum placeat beatae obcaecati? Beatae
+            commodi similique corrupti assumenda expedita.</p>
+    </div>
+</section>
+
+<section id="landingJoinSection" class="container-fluid d-flex justify-content-start align-items-center">
+    <div class="mx-auto text-center">
+        <h1 class="em-text-light">Join Us Today!</h1>
+        <a href="/tasks/new" class="btn btn-warning mr-1 my-2 my-lg-0">Get started as a Task Poster</button>
+            <a href="/tasks" class="btn btn-warning mr-1 my-2 my-lg-0">Get started as a Task Runner</button>
+    </div>
+</section>

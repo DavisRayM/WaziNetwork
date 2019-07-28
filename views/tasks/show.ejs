@@ -16,6 +16,7 @@
     </form>
 </div>
 
+<% if(!task.author.equals(currentUser._id)) {%>
 <h2>Make Bid</h2>
 <form action="/tasks/<%= task.id%>/bids" method="POST">
     <textarea name="description" required minlength="5" placeholder="Description"></textarea>
@@ -23,29 +24,29 @@
 
     <input type="submit">
 </form>
+<% } else { %>
+    <h3>Bids</h3>
+    <% bids.forEach(function(bid){%>
+    Author: <%= bid.author.username %>
+    Bid: <%= bid.bid %>
+    </br>
+    <% if(bid.author.equals(currentUser._id)) {%>
+    <%= bid.description %>
+    <div>
+        <button class="toggle-edit-form">Edit</button>
 
-<h3>Bids</h3>
-<!-- Display Bids - For Author Only -->
-<% bids.forEach(function(bid){%>
-Author: <%= bid.author.username %>
-Bid: <%= bid.bid %>
-</br>
-<% if(bid.author.equals(currentUser._id)) {%>
-<%= bid.description %>
-<div>
-    <button class="toggle-edit-form">Edit</button>
+        <form action="/tasks/<%= task.id%>/bids/<%= bid.id %>?_method=PUT" method="POST" class="edit-bid-form">
+            <textarea name="description" required minlength="5"
+                placeholder="Description"><%= bid.description %></textarea>
+            <input type="number" name="bid" required placeholder="Bid amount" value="<%= bid.bid %>">
+            <input type="submit" value="Update">
+        </form>
 
-    <form action="/tasks/<%= task.id%>/bids/<%= bid.id %>?_method=PUT" method="POST" class="edit-bid-form">
-        <textarea name="description" required minlength="5"
-            placeholder="Description"><%= bid.description %></textarea>
-        <input type="number" name="bid" required placeholder="Bid amount" value="<%= bid.bid %>">
-        <input type="submit" value="Update">
-    </form>
-
-    <form action="/tasks/<%= task.id%>/bids/<%= bid.id %>?_method=DELETE" method="POST">
-        <input type="submit" value="Delete">
-    </form>
-</div>
-<%}%>
-    <hr>
-<%})%>
+        <form action="/tasks/<%= task.id%>/bids/<%= bid.id %>?_method=DELETE" method="POST">
+            <input type="submit" value="Delete">
+        </form>
+    </div>
+    <%}%>
+        <hr>
+    <%})%>
+<% } %>
