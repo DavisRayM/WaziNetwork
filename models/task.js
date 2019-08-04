@@ -15,7 +15,13 @@ const TaskSchema = new Schema({
     additional_content: {
         secure_url: String,
         public_id: String
-    }
+    },
+    assigned_user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    hidden: Boolean,
+    completed: Boolean
 });
 
 TaskSchema.pre('remove', async function () {
