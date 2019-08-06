@@ -25,7 +25,8 @@ const {
   taskShow,
   taskEdit,
   taskUpdate,
-  taskDestroy
+  taskDestroy,
+  taskBidAccept
 } = require('../controllers/task');
 
 /* GET tasks index /tasks. */
@@ -48,5 +49,8 @@ router.put('/:id', isLoggedIn, asyncErrorHandler(isTaskAuthor), upload.single('a
 
 /* DELETE tasks destroy /tasks/:id. */
 router.delete('/:id', isLoggedIn, asyncErrorHandler(isTaskAuthor), asyncErrorHandler(taskDestroy));
+
+/* PUT tasks complete /tasks/:id/accept_bid. */
+router.put('/:id/accept_bid', asyncErrorHandler(isTaskAuthor), taskBidAccept);
 
 module.exports = router;

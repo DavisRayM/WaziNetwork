@@ -20,8 +20,14 @@ const TaskSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    hidden: Boolean,
-    completed: Boolean
+    hidden: {
+        type: Boolean,
+        default: false
+    },
+    completed: {
+        type: Boolean,
+        default: false
+    }
 });
 
 TaskSchema.pre('remove', async function () {

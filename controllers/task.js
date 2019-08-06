@@ -1,13 +1,19 @@
 const Task = require('../models/task');
 const Bid = require('../models/bid');
-const { cloudinary } = require('../cloudinary');
+const {
+    cloudinary
+} = require('../cloudinary');
 
 const appName = process.env.APP_NAME;
 
 module.exports = {
     // GET /tasks
     async taskIndex(req, res, next) {
-        let tasks = await Task.paginate({}, {
+        // Return non-hidden & non-complete tasks
+        let tasks = await Task.paginate({
+            'hidden': false,
+            'completed': false
+        }, {
             page: req.query.page || 1,
             limt: 20
         });
@@ -61,14 +67,18 @@ module.exports = {
     },
     // GET /tasks/:id/edit
     async taskEdit(req, res, next) {
-        const { task } = res.locals;
+        const {
+            task
+        } = res.locals;
         res.render('tasks/edit', {
             title: `${appName} - Edit ${task.title}`
         });
     },
     // PUT /tasks/:id
     async taskUpdate(req, res, next) {
-        const { task } = res.locals;
+        const {
+            task
+        } = res.locals;
         let deletedContent = req.body.deletedContent;
 
         if (deletedContent && deletedContent != '') {
@@ -93,7 +103,9 @@ module.exports = {
 
     // DELETE /tasks/:id
     async taskDestroy(req, res, next) {
-        const { task } = res.locals;
+        const {
+            task
+        } = res.locals;
 
         if (task.additional_content.public_id) {
             await cloudinary.v2.uploader.destroy(task.additional_content.public_id);
@@ -101,5 +113,20 @@ module.exports = {
 
         task.remove();
         res.redirect('/tasks');
+    },
+
+    // PUT /tasks/:id/accept_bid
+    async taskBidAccept(req, res, next) {
+        const { task } = res.locals;
+        const bidder = req.body.bidder;
+
+        // Set bidder and set task to hidden
+        task.assigned_user = bidder;
+        task.hidden = true;
+
+        // TODO: Start chat session
+        task.save()
+        // Redirect to messaging
+        res.redirect(`/tasks`)
     }
 }
