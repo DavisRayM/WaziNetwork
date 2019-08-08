@@ -30,8 +30,8 @@
     Author: <%= bid.author.username %>
     Bid: <%= bid.bid %>
     </br>
-    <% if(bid.author.equals(currentUser._id)) {%>
     <%= bid.description %>
+    <% if(bid.author.equals(currentUser._id)) {%>
     <div>
         <button class="toggle-edit-form">Edit</button>
 
@@ -46,7 +46,7 @@
             <input type="submit" value="Delete">
         </form>
     </div>
-    <%}%>
+    <%} else if()%>
         <hr>
     <%})%>
 <% } %>

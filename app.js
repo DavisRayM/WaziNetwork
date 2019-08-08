@@ -86,6 +86,7 @@ io.on('connection', (socket) => {
 app.use(function (req, res, next) {
   // set default title variable
   res.locals.title = 'Freelance Network';
+  res.locals.nav = 'none';
 
   // set error message
   res.locals.error = req.session.error || ' ';

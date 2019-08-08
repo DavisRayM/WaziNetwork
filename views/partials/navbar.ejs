@@ -1,22 +1,27 @@
-<style>
-    ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
+<nav class="navbar navbar-light navbar-expand-lg fixed-top py-1"
+    style="background-color: #ffff; border-bottom: #f4f4f4 solid 1px;">
+    <a href="/" class="navbar-brand"><span>Freelance</span>Network</a>
 
-    li {
-        display: inline;
-        padding: 5px;
-    }
-</style>
-<ul>
-    <li><a href="/">Home</a></li>
-    <% if(!currentUser) { %>
-        <li><a href="/auth">Login / Register</a></li>
-    <% } else { %>
-        <li><a href="/tasks">Tasks</a></li>
-        <li><a href="/tasks/new">New Task</a></li>
-        <li><span>Welcome, <%= currentUser.username %>. </span><a href="/auth/logout">Logout</a></li>
-    <% } %>
-</ul>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ml-auto justify-content-end">
+            <li class="nav-item <% if(nav == "home" ) {%> active <% } %>"><a href="/" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="/#features" class="nav-link">Features</a></li>
+            <li class="nav-item <% if(nav == "faq" ) {%> active <% } %>"><a href="/faq" class="nav-link">FAQ</a></li>
+        </ul>
+
+        <% if(!currentUser) { %>
+        <ul class="navbar-nav my-2 my-lg-0 ml-lg-3">
+            <li class="nav-item"><a href="/auth" class="nav-link">Login / Register</a></li>
+        </ul>
+        <% } else { %>
+        <ul class="navbar-nav my-2 my-lg-0 ml-lg-3">
+            <li class="nav-item"><a href="/auth/profile/<%= currentUser.username %>" class="nav-link">Welcome, <%= currentUser.username %></a></li>
+        </ul>
+        <% } %>
+    </div>
+</nav>

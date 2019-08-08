@@ -1,44 +1,68 @@
 <% layout('layouts/boilerplate') %>
 
-<section id="landingHeaderSection" class="container-fluid d-flex justify-content-start align-items-center">
-    <div class="container col-lg-8 mx-0 align-items-center em-text-light">
-        <h1 class="mt-5">
-            Home of the Remote Rockstar Workers!
-        </h1>
-        <p class="mt-1">We Provide Access to the best freelancers, giving you access to the best remote workforce
-            the internet has to offer.</p>
-        <a href="/tasks/new" class="btn btn-warning mr-1 my-2 my-lg-0">Start Posting Tasks</a>
-        <a href="/tasks" class="btn btn-outline-warning mr-1 my-2 my-lg-0">Start Completing Tasks</a>
+<% include ./partials/navbar.ejs %>
+
+<section class="hero text-center d-flex" id="home">
+    <div class="container align-self-center">
+        <h1 class="my-2">Welcome to Freelance Network</h1>
+        <h2>A community built for freelancers and hirers alike</h2>
+       <a href="/auth" class="btn btn-lg btn-outline-primary">GET STARTED</a>
     </div>
 </section>
 
-<section id="landingContentSection" class="container justify-content-start align-items-center">
-    <div class="container border rounded my-5 mx-auto col-8 py-3 px-5 content justify-content-start align-items-start">
-        <h2 class="section-heading">How it works</h2>
-        <p>It all begins with a simple post of a task. Tasks are always free to post and allow freelancers to bid
-            on your task, quoting the prices and time required to complete the task.</p>
-        <p class="lead">After acquiring bids it's now up to the poster to select their preferred bidder and release
-            the bid amount to be held in escrow. After that the bidder and task poster can chat in real-time and
-            get started on seeing their project completed</p>
-        <p>On Completion of Project, the poster then marks the task as completed and the payment is released to the
-            bidder.</p>
+<section class="text-center" id="features">
+    <div class="feature-title">
+        <h1>Features</h1>
+        <p>Listed below are the feautures available on our platform.</p>
+    </div>
 
-        <h2 class="section-heading">What do we have to offer ?</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione molestias adipisci pariatur nulla
-            asperiores expedita voluptate rerum exercitationem, quo, in harum placeat beatae obcaecati? Beatae
-            commodi similique corrupti assumenda expedita.</p>
-        <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. In, at ducimus suscipit voluptas
-            totam eos facilis dolorum exercitationem quam animi.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione molestias adipisci pariatur nulla
-            asperiores expedita voluptate rerum exercitationem, quo, in harum placeat beatae obcaecati? Beatae
-            commodi similique corrupti assumenda expedita.</p>
+    <div class="container feature-list">
+        <div class="row">
+            <div class="card col-6 col-lg-4">
+                <div class="card-body">
+                    <h5 class="card-title">Work from anywhere</h5>
+                    <p class="card-text">100% online, no restriction on when and where to post or perform tasks.</p>
+                </div>
+            </div>
+
+            <div class="card col-6 col-lg-4">
+                <div class="card-body">
+                    <h5 class="card-title">A community of skilled individuals</h5>
+                    <p class="card-text">Our freelancer moderation systems validate that the most skilled individual is
+                        who you get.</p>
+                </div>
+            </div>
+
+            <div class="card col-6 col-lg-4">
+                <div class="card-body">
+                    <h5 class="card-title">Platform built with everyone in mind</h5>
+                    <p class="card-text">Zero-hustle registration, no membership fees, get started in approx. 30 seconds
+                    </p>
+                </div>
+            </div>
+
+            <div class="card col-6 col-lg-4">
+                <div class="card-body">
+                    <h5 class="card-title">Real-time Chat</h5>
+                    <p class="card-text">Receive and give updates on task projects in real-time.</p>
+                </div>
+            </div>
+
+            <div class="card col-6 col-lg-4">
+                <div class="card-body">
+                    <h5 class="card-title">Informative Dashboards</h5>
+                    <p class="card-text">Track and monitor earnings and posted tasks easily.</p>
+                </div>
+            </div>
+
+            <div class="card col-6 col-lg-4">
+                <div class="card-body">
+                    <h5 class="card-title">Task Notification</h5>
+                    <p class="card-text">Always stay up to date with new tasks posted.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
-<section id="landingJoinSection" class="container-fluid d-flex justify-content-start align-items-center">
-    <div class="mx-auto text-center">
-        <h1 class="em-text-light">Join Us Today!</h1>
-        <a href="/tasks/new" class="btn btn-warning mr-1 my-2 my-lg-0">Get started as a Task Poster</button>
-            <a href="/tasks" class="btn btn-warning mr-1 my-2 my-lg-0">Get started as a Task Runner</button>
-    </div>
-</section>
+<% include ./partials/footer.ejs %>

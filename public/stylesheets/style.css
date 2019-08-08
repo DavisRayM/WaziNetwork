@@ -1,5 +1,135 @@
-html, body {
+/*
+Color Scheme
+
+Primary: #93c5f7
+Secondary: #597999
+
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Philosopher:700|Vollkorn:400,700&display=swap');
+
+html,
+body {
     height: 100vh;
+    font-family: 'Vollkorn', serif;
+    scroll-behavior: smooth;
+}
+
+/* Navbar Styling */
+
+a.navbar-brand {
+    font-size: 26px;
+}
+
+a.navbar-brand span {
+    color: #93c5f7;
+}
+
+#mainNav {
+    font-size: 18px;
+}
+
+#mainNav .navbar-nav .active>.nav-link {
+    color: #93c5f7;
+}
+
+#mainNav .navbar-nav .nav-link:hover {
+    color: #597999;
+}
+
+#home .btn-outline-primary {
+    margin-top: 30px;
+    border-radius: 50px;
+    color: #597999;
+    border-color: #597999;
+    border-width: 2px;
+}
+
+#home .btn-outline-primary:hover {
+    background-color: #597999;
+    color: #b2d3f5;
+}
+
+/* Hero Styling */
+.hero {
+    height: 100%;
+    width: 100%;
+    margin-top: 30px;
+    background: url("https://source.unsplash.com/k_T9Zj3SE8k") no-repeat fixed top;
+    background-size: cover;
+    margin-bottom: 15px;
+}
+
+.hero h1 {
+    color: #93c5f7;
+    font-family: 'Philosopher', sans-serif;
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+.hero h2 {
+    color: #464646;
+    font-size: 1.5rem;
+}
+
+/* Features Section Styling */
+#features {
+    padding: 20px;
+    height: 100%;
+}
+
+.feature-list {
+    margin-bottom: 15px;
+}
+
+.feature-title h1 {
+    font-weight: 400;
+    font-size: 3rem;
+    margin: 5px;
+}
+
+.feature-title p {
+    color: #464646;
+    font-size: 18px;
+}
+
+.feature-list .card {
+    padding: 25px 10px;
+    margin: 20px 0;
+    border: none;
+}
+
+.feature-list .card-title {
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 2;
+    letter-spacing: 1px;
+}
+
+.feature-list .card-text {
+    font-size: 14px;
+    color: #464646;
+    line-height: 2;
+    letter-spacing: 1px;
+}
+
+/* Footer Styling */
+.footer {
+    background-color: #2C3531;
+    padding: 20px;
+    color: #ffffff;
+}
+
+.footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.footer ul {
+    list-style: none;
+    padding: 0;
 }
 
 /* Utility classes */
