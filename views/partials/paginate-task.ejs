@@ -1,15 +1,19 @@
-<div style="margin: 20px 0;">
-    <% if(tasks.page - 1) {%>
-        <a href="/tasks?page=<%= tasks.page - 1 %>">Prev</a>
-    <% } %>
-
-    <% for(let i = 1; i <= tasks.pages; i++) {%>
-        <a href="/tasks?page=<%= i %>"
-            <%= i === tasks.page ? 'style=color:black;' : '' %>
-            ><%= i %></a>
-    <% } %>
-
-    <% if((tasks.page + 1) <= tasks.pages) {%>
-        <a href="/tasks?page=<%= tasks.page + 1 %>">Next</a>
-    <% } %>
+<div class="paginator">
+    <ul class="pagination">
+        <% if(tasks.page - 1) {%>
+            <li class="page-item">
+                <a class="page-link" href="/tasks?page=<%= tasks.page - 1 %>">Prev</a>
+            </li>
+        <% } %>
+        <% for(let i = 1; i <= tasks.pages; i++) {%>
+            <li class=" page-item <%= i === tasks.page ? "active" : "" %>">
+                <a href="/tasks?page=<%= i %>" class="page-link" %>><%= i %></a>
+            </li>
+        <% } %>
+        <% if((tasks.page + 1) <= tasks.pages) {%>
+            <li class="page-item">
+                <a href="/tasks?page=<%= tasks.page + 1 %>" class="page-link">Next</a>
+            </li>
+        <% } %>
+    </ul>
 </div>
