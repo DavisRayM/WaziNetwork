@@ -85,7 +85,7 @@ io.on('connection', (socket) => {
 // set local variables middleware
 app.use(function (req, res, next) {
   // set default title variable
-  res.locals.title = 'Freelance Network';
+  res.locals.title = 'Wazi Network';
   res.locals.nav = 'none';
 
   // set error message

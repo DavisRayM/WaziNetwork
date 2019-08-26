@@ -1,6 +1,6 @@
 <nav class="navbar navbar-light navbar-expand-lg fixed-top py-1"
     style="background-color: #ffff; border-bottom: #f4f4f4 solid 1px;">
-    <a href="/" class="navbar-brand"><span>Freelance</span>Network</a>
+    <a href="/" class="navbar-brand"><span>Wazi</span>Network</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,7 +24,20 @@
         </ul>
         <% } else { %>
         <ul class="navbar-nav my-2 my-lg-0 ml-lg-3">
-            <li class="nav-item"><a href="/auth/profile/<%= currentUser.username %>" class="nav-link">Welcome, <%= currentUser.username %></a></li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="userActionsDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Welcome <%= currentUser.username %>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="userActionsDropdown">
+                    <a class="dropdown-item" href="/auth/profile/<%= currentUser.username %>">
+                        View Profile
+                    </a>
+                    <a class="dropdown-item" href="#">View Task History</a>
+                    <a class="dropdown-item" href="/auth/logout">Logout</a>
+                </div>
+            </li>
         </ul>
         <% } %>
     </div>

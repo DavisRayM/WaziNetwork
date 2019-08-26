@@ -4,7 +4,7 @@ const User = require('../models/user');
 module.exports = {
     getAuthIndex: (req, res, next) => {
         res.render('auth/index', {
-            title: 'Freelance Network - Auth'
+            title: 'Wazi Network - Auth'
         });
     },
     postRegister: async (req, res, next) => {
@@ -65,7 +65,7 @@ module.exports = {
 
         return res.render('auth/user-profile', {
             user: user,
-            title: `Freelance Network - ${req.params.username}'s Profile'`
+            title: `Wazi Network - ${req.params.username}'s Profile'`
         });
     }
 }
