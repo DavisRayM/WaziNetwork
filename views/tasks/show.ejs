@@ -1,52 +1,84 @@
-<% layout('layouts/task-show') -%>
-<h1><%= task.title %></h1>
-<p><%= task.price_range %></p>
-<p><%= task.description %></p>
+<% layout('layouts/boilerplate') -%>
 
-<div>
-    <p>
-        <%= task.additional_content.secure_url %>
-    </p>
-</div>
+<% include ../partials/navbar.ejs %>
 
-<div><a href="/tasks/<%= task.id%>/edit"><button>Edit Task</button></a></div>
-<div>
-    <form action="/tasks/<%= task.id%>?_method=DELETE" method="POST">
-        <input type="submit" value="Delete">
-    </form>
-</div>
+<div id="task-detail" class="row max-width">
+    <div class="<%= task.author.equals(currentUser._id) ? 'col-7' : 'col' %>">
+        <div class="card text-center">
+            <div class="card-body">
+                <h2 class="card-title"><%= task.title.toUpperCase() %></h2>
+                <h6 class="card-text text-muted"><strong>Offered Pay:</strong> <%= task.price_range %></h6>
+                <p class="card-text"><%= task.description %></p>
+                <% if(task.additional_content.secure_url != null && task.additional_content.secure_url != "") { %>
+                <a href="<%= task.additional_content.secure_url %>" class="card-link task-action"><i
+                        class="fas fa-external-link-square-alt"></i> Attached Content</a>
+                <% } %>
+            </div>
 
-<% if(!task.author.equals(currentUser._id)) {%>
-<h2>Make Bid</h2>
-<form action="/tasks/<%= task.id%>/bids" method="POST">
-    <textarea name="description" required minlength="5" placeholder="Description"></textarea>
-    <input type="number" name="bid" required placeholder="Bid amount">
-
-    <input type="submit">
-</form>
-<% } else { %>
-    <h3>Bids</h3>
-    <% bids.forEach(function(bid){%>
-    Author: <%= bid.author.username %>
-    Bid: <%= bid.bid %>
-    </br>
-    <%= bid.description %>
-    <% if(bid.author.equals(currentUser._id)) {%>
-    <div>
-        <button class="toggle-edit-form">Edit</button>
-
-        <form action="/tasks/<%= task.id%>/bids/<%= bid.id %>?_method=PUT" method="POST" class="edit-bid-form">
-            <textarea name="description" required minlength="5"
-                placeholder="Description"><%= bid.description %></textarea>
-            <input type="number" name="bid" required placeholder="Bid amount" value="<%= bid.bid %>">
-            <input type="submit" value="Update">
-        </form>
-
-        <form action="/tasks/<%= task.id%>/bids/<%= bid.id %>?_method=DELETE" method="POST">
-            <input type="submit" value="Delete">
-        </form>
+            <% if(task.author.equals(currentUser._id)) {%>
+            <div class="card-footer d-flex justify-content-center">
+                <a href="/tasks/<%= task.id%>/edit"><button class="task-action">Edit Task</button></a>
+                <form action="/tasks/<%= task.id%>?_method=DELETE" method="POST">
+                    <input type="submit" class="task-action" value="Delete">
+                </form>
+            </div>
+            <% } %>
+        </div>
     </div>
-    <%} else if()%>
-        <hr>
-    <%})%>
+
+    <!-- Show Bids -->
+    <div class="<%= task.author.equals(currentUser._id) ? 'col-5' : 'd-none' %>">
+        <div id="bids">
+            <div class="card text-center">
+                <div class="card-body" style="overflow-y: scroll; max-height: 85vh;">
+                    <h2 class="card-title">Bids</h2>
+                    <% if(bids.length == 0) { %>
+                    <h5 class="card-text text-muted">No Bids Yet!</h5>
+                    <% } else { %>
+                    <div class="accordion" id="bidList">
+                        <% bids.forEach(function(bid) { %>
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse"
+                                        data-target="#<%= bid.author.username %>"><%= bid.bid %> Ksh Bid by
+                                        <%= bid.author.fname %></button>
+                                </h2>
+                            </div>
+                            <div class="collapse" id="<%= bid.author.username %>" data-parent="#bidList">
+                                <div class="card-body">
+                                    <p class="card-text"><%= bid.description %></p>
+                                    <form action="/tasks/<%= task.id %>/accept_bid?_method=PUT" method="post">
+                                        <input type="hidden" name="bidder" value="<%= bid.author._id %>">
+                                        <button type="submit" class="btn btn-outline-success btn-sm"> Accept Bid </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% if(!task.author.equals(currentUser._id)) { %>
+<form action="/tasks/<%= task.id%>/bids" method="POST">
+    <div class="card">
+        <div class="form-row">
+            <div class="col-8">
+                <textarea name="description" class="form-control" required minlength="5"
+                    placeholder="Description"></textarea>
+            </div>
+            <div class="col-2">
+                <input type="number" name="bid" class="form-control" required placeholder="Bid(Kshs)">
+            </div>
+            <div class="col-2">
+                <button type="submit" class="btn btn-sm btn-outline-secondary">Submit Bid</button>
+            </div>
+        </div>
+</form>
+</div>
 <% } %>

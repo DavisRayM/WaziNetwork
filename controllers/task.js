@@ -97,7 +97,7 @@ module.exports = {
         task.price_range = req.body.task.price_range;
         task.description = req.body.task.description;
 
-        task.save();
+        await task.save();
         res.redirect(`/tasks/${task.id}`);
     },
 
@@ -111,7 +111,7 @@ module.exports = {
             await cloudinary.v2.uploader.destroy(task.additional_content.public_id);
         }
 
-        task.remove();
+        await task.remove();
         res.redirect('/tasks');
     },
 
@@ -125,7 +125,7 @@ module.exports = {
         task.hidden = true;
 
         // TODO: Start chat session
-        task.save()
+       await task.save()
         // Redirect to messaging
         res.redirect(`/tasks`)
     }

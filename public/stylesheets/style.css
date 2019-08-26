@@ -16,15 +16,6 @@ body {
 }
 
 /* Navbar Styling */
-
-a.navbar-brand {
-    font-size: 26px;
-}
-
-a.navbar-brand span {
-    color: #93c5f7;
-}
-
 #mainNav {
     font-size: 18px;
 }
@@ -140,14 +131,66 @@ a.navbar-brand span {
     margin-top: 60px;
 }
 
+/* Task detail styling */
+
+#task-detail {
+    max-height: 85%;
+    margin-top: 60px;
+}
+
+#task-detail a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#task-detail .card {
+    width: 90%;
+    margin: 10px auto;
+}
+
+#task-detail .card:hover {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+form div.card {
+    padding: 10px;
+    width: 70%;
+    margin: 0 auto;
+}
+
+form div.card:hover {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.task-action {
+    border: none;
+    margin: 0px 5px;
+    background-color: transparent;
+    color: #6B757D !important;
+}
+
+.task-action:hover {
+    text-decoration: underline !important;
+}
+
+/* General bootstrap overrides */
+
 .card {
     margin: 5px 0;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
 }
 
 .card:hover {
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+a.navbar-brand {
+    font-size: 26px;
+}
+
+a.navbar-brand span {
+    color: #93c5f7;
 }
 
 /* Paginator Styling */

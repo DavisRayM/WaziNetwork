@@ -9,7 +9,7 @@
             <div class="card-body">
                 <h5 class="card-title"><%= task.title %></h2>
                 <h6 class="card-subtitle">Price Range: <%= task.price_range %></h6>
-                <p class="card-text"><%= task.description %></p>
+                <p class="card-text"><%= task.description.substr(0, 250) %>...</p>
                 <a href="/tasks/<%= task.id%>" class="card-link">View More</a>
             </div>
         </div>
