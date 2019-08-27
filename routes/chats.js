@@ -11,26 +11,27 @@ const {
     isLoggedIn
 } = require('../middleware/auth');
 
+const {
+    chatIndex,
+    chatCreate,
+    chatDelete,
+    chatMessage
+} = require('../controllers/chat');
+
 /* GET chat index /chats */
-router.get('/', isLoggedIn, (req, res, next) => {
-    res.send('Hi!');
-});
+router.get('/', isLoggedIn, asyncErrorHandler(chatIndex));
 
 /* POST chat create /chats */
-router.post('/', isLoggedIn, (req, res, next) => {
-    res.send('Hi!');
-});
+router.post('/', isLoggedIn, asyncErrorHandler(chatCreate));
 
 /* PUT chat new message /chats/:chat_id */
 router.put(
     '/:chat_id',
     isLoggedIn,
     asyncErrorHandler(isChatParticipant),
-    (req, res, next) => {
-        res.send('Hi!');
-    });
+    asyncErrorHandler(chatMessage));
 
 /* PUT chat soft delete /chats/:chat_id/delete */
-router.put('/:chat_id', isLoggedIn, asyncErrorHandler(isChatParticipant), (req, res, next) => {
-    res.send('Hi!');
-});
+router.put('/:chat_id', isLoggedIn, asyncErrorHandler(isChatParticipant), asyncErrorHandler(chatDelete));
+
+module.exports = router;

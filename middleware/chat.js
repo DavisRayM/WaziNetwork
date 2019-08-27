@@ -1,7 +1,7 @@
 const Chat = require('../models/chat');
 
 module.exports = {
-    isChatParticipant: (req, res, next) => {
+    async isChatParticipant(req, res, next) {
         const chat = await Chat.findById(req.params.chat_id);
         const isParticipant = false;
 

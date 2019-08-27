@@ -20,6 +20,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const tasksRouter = require('./routes/tasks');
 const bidsRouter = require('./routes/bids');
+const chatsRouter = require('./routes/chats');
 
 const User = require('./models/user');
 
@@ -100,6 +101,7 @@ app.use('/', indexRouter);
 app.use('/auth', usersRouter);
 app.use('/tasks', tasksRouter);
 app.use('/tasks/:id/bids', bidsRouter);
+app.use('/chats', chatsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
