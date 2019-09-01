@@ -11,9 +11,22 @@ module.exports = {
         if (req.isAuthenticated()) res.redirect(`/auth/profile/${req.user.username}`);
         return next();
     },
+    isSuperUser: (req, res, next) => {
+        if (req.user.is_superuser) return next();
+        res.redirect(`/auth/profile/${req.user.username}`);
+    },
     isTaskAuthor: async (req, res, next) => {
         const task = await Task.findById(req.params.id);
+        if (req.query.redirect) {
+            req.session.redirectTo = "/auth/admin/data";
+        } else {
+            req.session.redirectTo = "/tasks";
+        }
+
         if (task.author.equals(req.user._id)) {
+            res.locals.task = task;
+            return next();
+        } else if (req.user._id.is_superuser) {
             res.locals.task = task;
             return next();
         }

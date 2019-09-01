@@ -1,8 +1,7 @@
 const Chat = require('../models/chat');
+const ObjectId = require('mongoose').Types.ObjectId;
 
 const appName = process.env.APP_NAME;
-
-const ObjectId = require('mongoose').Schema.Types.ObjectId;
 
 module.exports = {
     async chatIndex(req, res, next) {
@@ -11,7 +10,7 @@ module.exports = {
             deleted: false
         });
 
-        res.render('/chats');
+        res.render('chats/index');
     },
 
     async chatCreate(req, res, next) {

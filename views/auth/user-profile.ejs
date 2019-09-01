@@ -37,6 +37,10 @@
                     <% if(user._id.equals(currentUser._id)) { %>
                     <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />
                     <% } %>
+                    <br>
+                    <% if(currentUser.is_superuser) {%>
+                        <a href="/auth/admin" class="profile-edit-btn">Visit Admin Portal</a>
+                    <% } %>
                 </div>
             </div>
             <div class="row">

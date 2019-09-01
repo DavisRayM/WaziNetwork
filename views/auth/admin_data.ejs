@@ -1,0 +1,68 @@
+<% layout('layouts/theme-boilerplate') %>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-plain">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title mt-0">Task List</h4>
+                    <p class="card-category">Tasks are ordered according to their creation date.</p>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="">
+                                <th>
+                                    Database ID
+                                </th>
+                                <th>
+                                    Title
+                                </th>
+                                <th>
+                                    Author
+                                </th>
+                                <th>
+                                    Completed
+                                </th>
+                                <th>
+                                    Assigned To
+                                </th>
+                                <th>
+                                    Bid Range(Ksh)
+                                </th>
+                            </thead>
+                            <tbody>
+                                <% tasks.forEach(function(task) { %>
+                                <tr data-target="#<%= task._id %>" class="clickable" data-toggle="collapse">
+                                    <td><%= task._id %></td>
+                                    <td><%= task.title %></td>
+                                    <td><%= task.author.username %></td>
+                                    <td><%= task.completed %></td>
+                                    <td><%= task.assigned_user == null ? "None" : task.assigned_user.username %></td>
+                                    <td><%= task.price_range %></td>
+                                    <td>
+                                        <div class="row">
+                                            <form action="/tasks/<%= task.id%>?_method=DELETE&redirect=admin" method="POST">
+                                                <button type="submit" class="btn  btn-small btn-primary"><i class="fa fa-trash"></i></button>
+                                            </form>
+                                            <a href="/tasks/<%=task._id%>" class="btn btn-small btn-primary"><i class="fa fa-link"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr id="<%= task._id %>" class="collapse">
+                                    <td colspan="7">
+                                        <div>
+                                            <p><%= task.description %></p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

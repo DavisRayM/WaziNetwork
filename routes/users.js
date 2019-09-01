@@ -6,10 +6,12 @@ var {
   getLogout,
   getProfile,
   postLogin,
-  postRegister
+  postRegister,
+  getAdminPage,
+  getAdminDataPage
 } = require('../controllers/auth');
 
-var { isNotLoggedIn, isLoggedIn } = require('../middleware/auth');
+var { isNotLoggedIn, isLoggedIn, isSuperUser } = require('../middleware/auth');
 
 /* GET /auth index */
 router.get('/', isNotLoggedIn, getAuthIndex);
@@ -25,5 +27,11 @@ router.get('/logout', getLogout);
 
 /* GET /auth/profile */
 router.get('/profile/:username', isLoggedIn, getProfile);
+
+/* GET /auth/admin */
+router.get('/admin', isLoggedIn, isSuperUser, getAdminPage);
+
+/* GET /auth/admin/data */
+router.get('/admin/data', isLoggedIn, isSuperUser, getAdminDataPage);
 
 module.exports = router;

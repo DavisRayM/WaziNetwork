@@ -18,7 +18,8 @@ const TaskSchema = new Schema({
     },
     assigned_user: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        default: null
     },
     hidden: {
         type: Boolean,

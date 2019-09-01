@@ -112,12 +112,15 @@ module.exports = {
         }
 
         await task.remove();
-        res.redirect('/tasks');
+        var redirectUrl = req.session.redirectTo || '/tasks';
+        res.redirect(redirectUrl);
     },
 
     // PUT /tasks/:id/accept_bid
     async taskBidAccept(req, res, next) {
-        const { task } = res.locals;
+        const {
+            task
+        } = res.locals;
         const bidder = req.body.bidder;
 
         // Set bidder and set task to hidden
@@ -125,7 +128,7 @@ module.exports = {
         task.hidden = true;
 
         // TODO: Start chat session
-       await task.save()
+        await task.save()
         // Redirect to messaging
         res.redirect(`/tasks`)
     }

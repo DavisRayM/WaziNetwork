@@ -1,5 +1,6 @@
 const passport = require('passport');
 const User = require('../models/user');
+const Task = require('../models/task');
 
 module.exports = {
     getAuthIndex: (req, res, next) => {
@@ -43,7 +44,15 @@ module.exports = {
                 if (err) {
                     return next(err);
                 }
-                const redirectUrl = req.session.redirectTo || `/auth/profile/${user.username}`;
+
+                var redirectUrl = '';
+
+                if (user.is_superuser) {
+                    redirectUrl = '/auth/admin'
+                } else {
+                    redirectUrl = req.session.redirectTo || `/auth/profile/${user.username}`;
+                }
+
                 delete req.session.redirectTo;
                 return res.redirect(redirectUrl);
             });
@@ -66,6 +75,22 @@ module.exports = {
         return res.render('auth/user-profile', {
             user: user,
             title: `Wazi Network - ${req.params.username}'s Profile'`
+        });
+    },
+    getAdminPage: async (req, res, next) => {
+        const users = await User.find({});
+        const tasks = await Task.find({});
+        res.render('auth/admin', {
+            title: "Admin Portal",
+            users: users,
+            tasks_length: tasks.length
+        });
+    },
+    getAdminDataPage: async (req, res, next) => {
+        const tasks = await Task.find({}).populate('author').populate('assigned_user');
+        res.render('auth/admin_data', {
+            title: "Admin Portal - Data Page",
+            tasks: tasks,
         });
     }
 }
