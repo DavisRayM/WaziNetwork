@@ -8,7 +8,8 @@ var {
   postLogin,
   postRegister,
   getAdminPage,
-  getAdminDataPage
+  getAdminDataPage,
+  getAdminUserPage
 } = require('../controllers/auth');
 
 var { isNotLoggedIn, isLoggedIn, isSuperUser } = require('../middleware/auth');
@@ -33,5 +34,8 @@ router.get('/admin', isLoggedIn, isSuperUser, getAdminPage);
 
 /* GET /auth/admin/data */
 router.get('/admin/data', isLoggedIn, isSuperUser, getAdminDataPage);
+
+/* GET /auth/admin/users */
+router.get('/admin/users', isLoggedIn, isSuperUser, getAdminUserPage);
 
 module.exports = router;

@@ -94,5 +94,14 @@ module.exports = {
             tasks: tasks,
             page: "data"
         });
-    }
+    },
+    getAdminUserPage: async (req, res, next) => {
+        const users = await User.find({});
+
+        res.render("auth/admin_user", {
+            title: "Admin Portal - User Page",
+            users: users,
+            page: "users"
+        })
+    },
 }

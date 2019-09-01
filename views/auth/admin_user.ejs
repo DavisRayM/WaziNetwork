@@ -1,0 +1,57 @@
+<% layout('layouts/theme-boilerplate') %>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-plain">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title mt-0">User List</h4>
+                    <p class="card-category">Users are ordered according to their creation date.</p>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="">
+                                <th>
+                                    Database ID
+                                </th>
+                                <th>
+                                    Username
+                                </th>
+                                <th>
+                                    Full name
+                                </th>
+                                <th>
+                                    Completed Tasks
+                                </th>
+                                <th>
+                                    Failed Tasks
+                                </th>
+                                <th>
+                                   CV Link
+                                </th>
+                            </thead>
+                            <tbody>
+                                <% users.forEach(function(user) { %>
+                                <tr>
+                                    <td><%= user._id %></td>
+                                    <td><%= user.username %></td>
+                                    <td><%= user.fname + " " + user.lname %></td>
+                                    <td><%= user.meta.completed_tasks %></td>
+                                    <td><%= user.meta.failed_tasks %></td>
+                                    <td><%= "Hey" %></td>
+                                    <td>
+                                        <div class="row">
+                                            <a href="/auth/profile/<%=user.username%>" class="btn btn-small btn-primary"><i class="fa fa-link"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
