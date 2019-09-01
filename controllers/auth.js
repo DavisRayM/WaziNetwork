@@ -83,7 +83,8 @@ module.exports = {
         res.render('auth/admin', {
             title: "Admin Portal",
             users: users,
-            tasks_length: tasks.length
+            tasks_length: tasks.length,
+            page: "dash"
         });
     },
     getAdminDataPage: async (req, res, next) => {
@@ -91,6 +92,7 @@ module.exports = {
         res.render('auth/admin_data', {
             title: "Admin Portal - Data Page",
             tasks: tasks,
+            page: "data"
         });
     }
 }
