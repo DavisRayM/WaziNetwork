@@ -31,8 +31,9 @@ const engine = require('ejs-mate');
 const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
+const port = process.env.port || 3000;
 
-server.listen(80);
+server.listen(port);
 
 // view engine setup
 app.engine('ejs', engine);
