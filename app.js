@@ -10,6 +10,9 @@ const passport = require('passport');
 const session = require('express-session');
 const methodOverride = require('method-override');
 
+const ATLAS_USER = process.env.CLOUD_ATLAS_USERNAME;
+const ATLAS_PASS = process.env.CLOUD_ATLAS_PASSWORD;
+
 // Development Code: auto-generate data
 // Uncomment to generate 80 tasks by default
 // Check ./seeds.js to modify
@@ -66,10 +69,12 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // Connect to DB
-mongoose.connect('mongodb://localhost:27017/final-projectr', {
-  useNewUrlParser: true,
-  useCreateIndex: true
-});
+
+mongoose.connect(
+  `mongodb+srv://${ATLAS_USER}:${ATLAS_PASS}@wazinetwork-ahbjj.mongodb.net/test?retryWrites=true&w=majority`, {
+    useNewUrlParser: true,
+    useCreateIndex: true
+  });
 
 // Check db connection
 const db = mongoose.connection;
