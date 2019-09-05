@@ -12,7 +12,7 @@ async function seedPost() {
             title: faker.lorem.word(),
             description: faker.lorem.text(),
             author: {
-                '_id': '5d529ef66cd76883e5cfcbfe',
+                '_id': '5d6e4859a584800017d39ac6',
                 'username': 'DavisRayM',
             }
         };

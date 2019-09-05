@@ -9,6 +9,15 @@ module.exports = {
         });
     },
     postRegister: async (req, res, next) => {
+        if (req.file) {
+            req.body.portfolio = {
+                secure_url: req.file.secure_url,
+                public_id: req.file.public_id
+            };
+        }
+
+        console.log(req.body);
+
         const user = await User.register(new User(req.body), req.body.password);
 
         req.login(user, (err) => {

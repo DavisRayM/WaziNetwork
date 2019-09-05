@@ -39,7 +39,7 @@
                                     <td><%= user.fname + " " + user.lname %></td>
                                     <td><%= user.meta.completed_tasks %></td>
                                     <td><%= user.meta.failed_tasks %></td>
-                                    <td><%= "Hey" %></td>
+                                    <td><a href="<%= user.portfolio.secure_url %>">Portfolio Link</a></td>
                                     <td>
                                         <div class="row">
                                             <a href="/auth/profile/<%=user.username%>" class="btn btn-small btn-primary"><i class="fa fa-link"></i></a>

@@ -13,12 +13,6 @@ const methodOverride = require('method-override');
 const ATLAS_USER = process.env.CLOUD_ATLAS_USERNAME;
 const ATLAS_PASS = process.env.CLOUD_ATLAS_PASSWORD;
 
-// Development Code: auto-generate data
-// Uncomment to generate 80 tasks by default
-// Check ./seeds.js to modify
-// const seedPost = require('./seeds');
-// seedPost();
-
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const tasksRouter = require('./routes/tasks');
@@ -31,7 +25,7 @@ const engine = require('ejs-mate');
 const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
-const port = process.env.port || 3000;
+const port = process.env.port || 80;
 
 server.listen(port);
 
@@ -82,6 +76,11 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.on('open', () => {
   console.log('Connected to the goose!');
+  // Development Code: auto-generate data
+  // Uncomment to generate 80 tasks by default
+  // Check ./seeds.js to modify
+  // const seedPost = require('./seeds');
+  // seedPost();
 })
 
 // Setup Socket.io
