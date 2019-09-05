@@ -1,5 +1,6 @@
 const Task = require('../models/task');
 const Bid = require('../models/bid');
+const User = require('../models/user');
 
 module.exports = {
     isLoggedIn: (req, res, next) => {
@@ -44,4 +45,13 @@ module.exports = {
         req.session.error = 'Can not edit bid!';
         return res.redirect('/');
     },
+    isOwnProfileOrSuper: async (req, res, next) => {
+        const user = await User.findOne({
+            username: req.params.username
+        });
+
+        if (user._id.equals(req.user._id) || req.user.is_superuser) return next();
+
+        res.redirect(`/auth/profile/${req.user.username}`);
+    }
 }

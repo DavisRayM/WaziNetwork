@@ -32,6 +32,14 @@ const UserSchema = new Schema({
         type: Boolean,
         default: false
     },
+    bio: {
+        type: String,
+        default: "This user has not said anything about themselves yet!"
+    },
+    experience_level: {
+        type: String,
+        default: "Beginner"
+    },
     meta: {
         completed_tasks: {
             type: Number,

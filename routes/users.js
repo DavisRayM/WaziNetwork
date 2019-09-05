@@ -15,6 +15,7 @@ var {
   getProfile,
   postLogin,
   postRegister,
+  updateProfile,
   getAdminPage,
   getAdminDataPage,
   getAdminUserPage
@@ -23,7 +24,8 @@ var {
 var {
   isNotLoggedIn,
   isLoggedIn,
-  isSuperUser
+  isSuperUser,
+  isOwnProfileOrSuper
 } = require('../middleware/auth');
 
 var { asyncErrorHandler } = require('../middleware');
@@ -42,6 +44,9 @@ router.get('/logout', getLogout);
 
 /* GET /auth/profile */
 router.get('/profile/:username', isLoggedIn, asyncErrorHandler(getProfile));
+
+/* PUT /auth/profile/:username */
+router.put('/profile/:username', isOwnProfileOrSuper, upload.single('cv-upload'), asyncErrorHandler(updateProfile));
 
 /* GET /auth/admin */
 router.get('/admin', isLoggedIn, isSuperUser, asyncErrorHandler(getAdminPage));

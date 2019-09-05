@@ -4,130 +4,203 @@
 
 <div id="userProfile" class="max-height">
     <div class="container emp-profile">
-        <form method="post">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="profile-img">
-                        <img src="<%= user.profile_picture.secure_url %>" alt="" />
-                        <div class="file btn btn-lg btn-primary">
-                            Change Photo
-                            <input type="file" name="file" />
-                        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="<%= user.profile_picture.secure_url %>" alt="" />
+                    <div class="file btn btn-lg btn-primary">
+                        Change Photo
+                        <input type="file" name="file" />
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="profile-head">
-                        <h5>
-                            <%= user.fname + " " + user.lname %>
-                        </h5>
-                        <p class="proile-rating">RATING : <span>5</span> Stars</p>
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                                    aria-controls="home" aria-selected="true">About</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                                    aria-controls="profile" aria-selected="false">Timeline</a>
-                            </li>
-                        </ul>
-                    </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>
+                        <%= user.fname + " " + user.lname %>
+                    </h5>
+                    <p class="proile-rating">RATING : <span>5</span> Stars</p>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                aria-controls="home" aria-selected="true">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                aria-controls="profile" aria-selected="false">Timeline</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
+                <div class="row">
                     <% if(user._id.equals(currentUser._id)) { %>
-                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />
+                    <button type="button" class="btn btn-sm btn-primary mb-2" data-toggle="modal"
+                        data-target="#editProfileForm">
+                        Edit Profile
+                    </button>
+
+                    <div class="modal fade" id="editProfileForm" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Edit Profile Form</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form action="/auth/profile/<%= user.username %>?_method=PUT"
+                                    enctype="multipart/form-data" method="POST">
+                                    <div class="modal-body">
+                                        <div class="row pb-2">
+                                            <div class="col">
+                                                <input type="text" class="form-control" placeholder="First name"
+                                                    name="fname" value="<%= user.fname %>">
+                                            </div>
+                                            <div class="col">
+                                                <input type="text" class="form-control" placeholder="Last name"
+                                                    name="lname" value="<%= user.lname %>">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="bioInput">Biography</label>
+                                            <textarea class="form-control" id="bioInput"
+                                                rows="3" name="bio"><%= user.bio %></textarea>
+                                        </div>
+
+                                        <div class="input-group mb-3">
+                                            <div class="custom-file">
+                                                <input name="cv-upload" type="file" class="custom-file-input"
+                                                    id="cvUpload" aria-describedby="inputCVUpload"
+                                                    accept="application/pdf">
+                                                <label class="custom-file-label" for="cvUpload">Choose CV file -
+                                                    *pdf</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-check form-check-inline">
+                                            <input name="experience_level" class="form-check-input" type="checkbox"
+                                                id="inlineCheckbox1" value="Beginner">
+                                            <label class="form-check-label" for="inlineCheckbox1">Beginner</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input name="experience_level" class="form-check-input" type="checkbox"
+                                                id="inlineCheckbox2" value="Intermediate">
+                                            <label class="form-check-label" for="inlineCheckbox2">Intermediate</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input name="experience_level" class="form-check-input" type="checkbox"
+                                                id="inlineCheckbox3" value="Expert">
+                                            <label class="form-check-label" for="inlineCheckbox3">Expert</label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="number" name="contact_number" class="form-control form-input"
+                                                placeholder="Phone number" value="<%= user.contact_number %>">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
                     <% } %>
-                    <br>
                     <% if(currentUser.is_superuser) {%>
-                        <a href="/auth/admin" class="profile-edit-btn">Visit Admin Portal</a>
+                    <a href="/auth/admin" class="btn btn-sm btn-primary">Visit Admin Portal</a>
                     <% } %>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="profile-work">
-                        <p>WORK LINK</p>
-                        <a href="">Website Link</a><br />
-                        <a href="<%= user.portfolio.secure_url %>">CV Link</a>
-                        <!-- <p>SKILLS</p>
-                        <a href="">Web Designer</a><br />
-                        <a href="">Web Developer</a><br />
-                        <a href="">WordPress</a><br />
-                        <a href="">WooCommerce</a><br />
-                        <a href="">PHP, .Net</a><br /> -->
-                    </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <p>WORK LINK</p>
+                    <a href="<%= user.portfolio.secure_url %>">CV Link</a>
                 </div>
-                <div class="col-md-8">
-                    <div class="tab-content profile-tab" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Name</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p> <%= user.fname + " " + user.lname %></p>
-                                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Name</label>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Email</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p> <%= user.email %></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Phone</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p><%= user.contact_number %></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Profession</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Web Developer and Designer</p>
-                                </div>
+                            <div class="col-md-6">
+                                <p> <%= user.fname + " " + user.lname %></p>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Experience</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Expert</p>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Email</label>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Hourly Rate</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>10$/hr</p>
-                                </div>
+                            <div class="col-md-6">
+                                <p> <%= user.email %></p>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Total Projects</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p><%= user.meta.completed_tasks %></p>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Phone</label>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label>Your Bio</label><br />
-                                    <p>Your detail description</p>
-                                </div>
+                            <div class="col-md-6">
+                                <p><%= user.contact_number %></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Profession</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Web Developer and Designer</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Experience</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p><%= user.experience_level %></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Total Projects</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p><%= user.meta.completed_tasks %></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Your Bio</label><br />
+                                <p><%= user.bio %></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+
+<script>
+    $('#cvUpload').on('change', function () {
+        //get the file name
+        var fileName = $(this).val();
+        var cleanFileName = fileName.replace('C:\\fakepath\\', " ");
+        //replace the "Choose a file" label
+        $(this).next('.custom-file-label').html(cleanFileName);
+    })
+</script>

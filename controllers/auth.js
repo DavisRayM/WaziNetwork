@@ -2,6 +2,10 @@ const passport = require('passport');
 const User = require('../models/user');
 const Task = require('../models/task');
 
+const {
+    cloudinary
+} = require('../cloudinary');
+
 module.exports = {
     getAuthIndex: (req, res, next) => {
         res.render('auth/index', {
@@ -66,6 +70,32 @@ module.exports = {
                 return res.redirect(redirectUrl);
             });
         })(req, res, next);
+    },
+    updateProfile: async (req, res, next) => {
+        const user = await User.findOne({
+            username: req.params.username
+        });
+
+        if (req.file) {
+            console.log(req.file);
+            if (user.portfolio.public_id) {
+                await cloudinary.v2.uploader.destroy(user.portfolio.public_id);
+            }
+
+            user.portfolio = {
+                secure_url: req.file.secure_url,
+                public_id: req.file.public_id
+            };
+        }
+
+        user.fname = req.body.fname;
+        user.lname = req.body.lname;
+        user.contact_number = req.body.contact_number;
+        user.bio = req.body.bio;
+        user.experience_level = req.body.experience_level;
+
+        await user.save();
+        res.redirect(`/auth/profile/${user.username}`);
     },
     getLogout: (req, res) => {
         req.logout();
