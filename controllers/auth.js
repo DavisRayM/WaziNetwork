@@ -1,6 +1,8 @@
 const passport = require('passport');
 const User = require('../models/user');
 const Task = require('../models/task');
+const ErrorModel = require('../models/error');
+
 
 const {
     cloudinary
@@ -120,10 +122,14 @@ module.exports = {
     getAdminPage: async (req, res, next) => {
         const users = await User.find({});
         const tasks = await Task.find({});
+        const errors = await ErrorModel.find({
+            solved: false
+        });
         res.render('auth/admin', {
             title: "Admin Portal",
             users: users,
             tasks_length: tasks.length,
+            errors_length: errors.length,
             page: "dash"
         });
     },

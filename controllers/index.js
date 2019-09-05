@@ -1,4 +1,4 @@
-const Error = require('../models/error');
+const ErrorModel = require('../models/error');
 
 module.exports = {
     getIndex: (req, res, next) => {
@@ -14,7 +14,7 @@ module.exports = {
         });
     },
     postError: (req, res, next) => {
-        const error = await Error.create(req.body);
+        const error = await ErrorModel.create(req.body);
         error.reporter = req.user._id;
         await error.save();
 
@@ -23,7 +23,7 @@ module.exports = {
         res.redirect(redirectTo);
     },
     putError: (req, res, next) => {
-        const error = await Error.findById(req.params.error_id);
+        const error = await ErrorModel.findById(req.params.error_id);
 
         error.solved = true;
         error.solved_on = Date.now();
