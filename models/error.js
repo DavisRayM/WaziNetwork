@@ -6,6 +6,7 @@ const ErrorSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
+    error_status: Number,
     detail: String,
     solved_on: {
         type: Date,
