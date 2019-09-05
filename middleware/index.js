@@ -7,7 +7,6 @@ module.exports = {
         },
     errorHandler: async (err, req, res, next) => {
         // set locals, only providing error in development
-        console.log(err);
         if (err.name == 'CastError') {
             error_status = 404;
             error_meaning = "Page does not exist";
@@ -17,7 +16,6 @@ module.exports = {
         }
 
         await ErrorModel.create({
-            reporter: req.user._id || null,
             detail: err.stack,
             error_status: error_status
         });

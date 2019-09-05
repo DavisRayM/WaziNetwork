@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const ErrorSchema = new Schema({
     reporter: {
         type: Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User",
+        default: null
     },
     error_status: Number,
     detail: String,
