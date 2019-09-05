@@ -150,4 +150,13 @@ module.exports = {
             page: "users"
         })
     },
+    getAdminNotificationPage: async (req, res, next) => {
+        const errors = await ErrorModel.find({ solved: false });
+
+        res.render("auth/admin_notification", {
+            title: "Admin Portal - Notification Page",
+            errors: errors,
+            page: "notif"
+        })
+    },
 }

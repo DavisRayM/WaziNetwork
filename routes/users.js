@@ -18,7 +18,8 @@ var {
   updateProfile,
   getAdminPage,
   getAdminDataPage,
-  getAdminUserPage
+  getAdminUserPage,
+  getAdminNotificationPage
 } = require('../controllers/auth');
 
 var {
@@ -56,5 +57,8 @@ router.get('/admin/data', isLoggedIn, isSuperUser, asyncErrorHandler(getAdminDat
 
 /* GET /auth/admin/users */
 router.get('/admin/users', isLoggedIn, isSuperUser, asyncErrorHandler(getAdminUserPage));
+
+/* GET /auth/admin/notifications */
+router.get('/admin/notifications', isLoggedIn, isSuperUser, asyncErrorHandler(getAdminNotificationPage));
 
 module.exports = router;

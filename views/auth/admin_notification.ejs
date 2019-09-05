@@ -1,0 +1,12 @@
+<% layout('layouts/theme-boilerplate') %>
+
+<div class="container-fluid">
+    <% errors.forEach(function(error) { %>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title"><%= error.created_at %> - Error Encountered</h5>
+            <code class="card-text"><%= error.detail %></code>
+        </div>
+    </div>
+    <% }) %>
+</div>
