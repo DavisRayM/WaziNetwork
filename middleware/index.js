@@ -16,7 +16,7 @@ module.exports = {
         }
 
         await ErrorModel.create({
-            detail: err.stack,
+            detail: req.originalUrl + " - " + err.stack,
             error_status: error_status
         });
 

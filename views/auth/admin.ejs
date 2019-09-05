@@ -20,7 +20,8 @@
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="card card-stats">
-                <div class="card-header card-header-danger card-header-icon">
+                <div
+                    class="card-header <%= errors_length != 0 ? 'card-header-danger' : 'card-header-success' %> card-header-icon">
                     <div class="card-icon">
                         <i class="material-icons">info_outline</i>
                     </div>

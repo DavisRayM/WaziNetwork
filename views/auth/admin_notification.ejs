@@ -2,11 +2,23 @@
 
 <div class="container-fluid">
     <% errors.forEach(function(error) { %>
-    <div class="card">
+    <div class="card text-center">
         <div class="card-body">
-            <h5 class="card-title"><%= error.created_at %> - Error Encountered</h5>
+            <h5 class="card-title mb-3"><%= error.created_at %> - Error Encountered</h5>
             <code class="card-text"><%= error.detail %></code>
+        </div>
+
+        <div class="card-footer">
+            <form action='/<%= error._id %>?_method=PUT&redirect=admin' method="POST">
+                <button type="submit" class="btn btn-sm btn-primary">Mark Issue Solved</button>
+            </form>
         </div>
     </div>
     <% }) %>
+
+    <% if(errors.length == 0) {%>
+    <div class="col text-center">
+        <h1 class="text-muted">No Errors Encountered</h1>
+    </div>
+    <% } %>
 </div>

@@ -29,9 +29,6 @@ module.exports = {
         error.solved_on = Date.now();
 
         await error.save();
-
-        const redirectTo = req.session.redirectTo || "/";
-
-        res.redirect(redirectTo);
+        res.redirect("/auth/admin/notifications");
     }
 }
