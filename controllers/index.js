@@ -13,7 +13,7 @@ module.exports = {
             nav: 'faq'
         });
     },
-    postError: (req, res, next) => {
+    postError: async (req, res, next) => {
         const error = await ErrorModel.create(req.body);
         error.reporter = req.user._id;
         await error.save();
@@ -22,7 +22,7 @@ module.exports = {
 
         res.redirect(redirectTo);
     },
-    putError: (req, res, next) => {
+    putError: async (req, res, next) => {
         const error = await ErrorModel.findById(req.params.error_id);
 
         error.solved = true;
