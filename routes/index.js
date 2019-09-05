@@ -1,13 +1,19 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+
+const { getIndex, getFaq, postError, putError } = require('../controllers/');
+const { asyncErrorHandler } = require('../middleware/')
+const { isSuperUser } = require('../middleware/auth');
 
 /* GET home page. */
-router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Wazi Network', nav: 'home' });
-});
+router.get('/', getIndex);
 
-router.get('/faq', (req, res, next) => {
-  res.render('faq', { title: 'Wazi Network - Frequently Asked Questions', nav: 'faq'})
-});
+router.get('/faq', getFaq);
+
+/* POST error creation */
+router.post('/', asyncErrorHandler(postError));
+
+/* PUT error solve */
+router.put('/:error_id', isSuperUser, asyncErrorHandler(putError));
 
 module.exports = router;
