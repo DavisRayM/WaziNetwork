@@ -95,7 +95,8 @@ module.exports = {
         user.experience_level = req.body.experience_level;
 
         await user.save();
-        res.redirect(`/auth/profile/${user.username}`);
+        var redirectUrl = req.session.redirectTo || `/auth/profile/${user.username}`;
+        res.redirect(redirectUrl);
     },
     getLogout: (req, res) => {
         req.logout();

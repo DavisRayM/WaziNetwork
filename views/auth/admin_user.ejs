@@ -28,7 +28,7 @@
                                     Failed Tasks
                                 </th>
                                 <th>
-                                   CV Link
+                                    CV Link
                                 </th>
                             </thead>
                             <tbody>
@@ -42,7 +42,100 @@
                                     <td><a href="<%= user.portfolio.secure_url %>">Portfolio Link</a></td>
                                     <td>
                                         <div class="row">
-                                            <a href="/auth/profile/<%=user.username%>" class="btn btn-small btn-primary"><i class="fa fa-link"></i></a>
+                                            <a href="/auth/profile/<%=user.username%>" class="btn btn-sm btn-primary"><i
+                                                    class="fa fa-link"></i></a>
+                                            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                                                data-target="#editProfileForm">
+                                                <i class="fa fa-edit"></i>
+                                            </button>
+
+                                            <div class="modal fade" id="editProfileForm" tabindex="-1" role="dialog"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Edit Profile
+                                                                Form</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form
+                                                            action="/auth/profile/<%= user.username %>?_method=PUT&redirect=admin"
+                                                            enctype="multipart/form-data" method="POST">
+                                                            <div class="modal-body">
+                                                                <div class="row pb-2">
+                                                                    <div class="col">
+                                                                        <input type="text" class="form-control"
+                                                                            placeholder="First name" name="fname"
+                                                                            value="<%= user.fname %>">
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <input type="text" class="form-control"
+                                                                            placeholder="Last name" name="lname"
+                                                                            value="<%= user.lname %>">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="bioInput">Biography</label>
+                                                                    <textarea class="form-control" id="bioInput"
+                                                                        rows="3" name="bio"><%= user.bio %></textarea>
+                                                                </div>
+
+                                                                <div class="input-group my-3">
+                                                                    <div class="custom-file">
+                                                                        <input name="cv-upload" type="file"
+                                                                            class="custom-file-input" id="cvUpload"
+                                                                            aria-describedby="inputCVUpload"
+                                                                            accept="application/pdf">
+                                                                        <label class="custom-file-label"
+                                                                            for="cvUpload">Choose CV file -
+                                                                            *pdf</label>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-check form-check-inline">
+                                                                    <input name="experience_level"
+                                                                        class="form-check-input" type="checkbox"
+                                                                        id="inlineCheckbox1" value="Beginner">
+                                                                    <label class="form-check-label"
+                                                                        for="inlineCheckbox1">Beginner</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input name="experience_level"
+                                                                        class="form-check-input" type="checkbox"
+                                                                        id="inlineCheckbox2" value="Intermediate">
+                                                                    <label class="form-check-label"
+                                                                        for="inlineCheckbox2">Intermediate</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input name="experience_level"
+                                                                        class="form-check-input" type="checkbox"
+                                                                        id="inlineCheckbox3" value="Expert">
+                                                                    <label class="form-check-label"
+                                                                        for="inlineCheckbox3">Expert</label>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <input type="number" name="contact_number"
+                                                                        class="form-control form-input"
+                                                                        placeholder="Phone number"
+                                                                        value="<%= user.contact_number %>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Save
+                                                                    changes</button>
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>

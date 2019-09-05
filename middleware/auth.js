@@ -52,6 +52,12 @@ module.exports = {
 
         if (user._id.equals(req.user._id) || req.user.is_superuser) return next();
 
+        if (req.query.redirect) {
+            req.session.redirectTo = "/auth/admin/user";
+        } else {
+            req.session.redirectTo = `/auth/profile/${req.user.username}`;
+        }
+
         res.redirect(`/auth/profile/${req.user.username}`);
     }
 }
