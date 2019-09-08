@@ -114,8 +114,17 @@ module.exports = {
             return res.redirect('/');
         }
 
+        const created_tasks = await Task.find({
+            author: user._id
+        }).populate('assigned_user');
+        const assigned_tasks = await Task.find({
+            assigned_user: user._id
+        }).populate('author');
+
         return res.render('auth/user-profile', {
             user: user,
+            created_tasks: created_tasks,
+            assigned_tasks: assigned_tasks,
             title: `Wazi Network - ${req.params.username}'s Profile'`
         });
     },
@@ -151,7 +160,9 @@ module.exports = {
         })
     },
     getAdminNotificationPage: async (req, res, next) => {
-        const errors = await ErrorModel.find({ solved: false });
+        const errors = await ErrorModel.find({
+            solved: false
+        });
 
         res.render("auth/admin_notification", {
             title: "Admin Portal - Notification Page",
