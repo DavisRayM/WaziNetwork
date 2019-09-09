@@ -35,11 +35,8 @@ module.exports = {
     },
     postLogin: (req, res, next) => {
         passport.authenticate('local', function (err, user, info) {
-            if (err) {
-                return next(err);
-            }
+            if (err) return next(err);
             if (!user) {
-
                 if (info.name === 'IncorrectUsernameError') {
                     req.session.error = {
                         username: info.message
@@ -54,14 +51,11 @@ module.exports = {
 
                 return res.redirect('/auth');
             }
-
             req.logIn(user, function (err) {
                 if (err) {
                     return next(err);
                 }
-
                 var redirectUrl = '';
-
                 if (user.is_superuser) {
                     redirectUrl = '/auth/admin'
                 } else {
